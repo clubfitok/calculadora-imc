@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora IMC</title>
+<style>
+/* Estilos CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #051125;
+    color: #FFFFFF;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.calculator-form {
+    background-color: #AD1267;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.calculator-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.calculator-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.calculator-form button {
+    padding: 10px 20px;
+    background-color: #FFFFFF;
+    color: #AD1267;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Índice de Masa Corporal (IMC)</h1>
+    
+    <div class="calculator-form">
+        <label for="peso">Peso (kg):</label>
+        <input type="text" id="peso" required>
+        
+        <label for="altura">Altura (cm):</label>
+        <input type="text" id="altura" required>
+        
+        <button onclick="calcularIMC()">Calcular IMC</button>
+        
+        <div class="result" id="resultado"></div>
+    </div>
+</div>
+
+<script>
+function calcularIMC() {
+    var peso = parseFloat(document.getElementById('peso').value);
+    var altura = parseFloat(document.getElementById('altura').value);
+    
+    if (isNaN(peso) || isNaN(altura)) {
+        document.getElementById('resultado').innerText = 'Por favor, introduce valores válidos.';
+        return;
+    }
+    
+    var imc = peso / Math.pow(altura / 100, 2);
+    var mensaje = 'Tu IMC es: ' + imc.toFixed(2) + '. ';
+    
+    if (imc < 18.5) {
+        mensaje += 'Peso bajo.';
+    } else if (imc < 25) {
+        mensaje += 'Peso normal.';
+    } else if (imc < 30) {
+        mensaje += 'Sobrepeso.';
+    } else {
+        mensaje += 'Obesidad.';
+    }
+    
+    document.getElementById('resultado').innerText = mensaje;
+}
+</script>
+
+</body>
+</html>
